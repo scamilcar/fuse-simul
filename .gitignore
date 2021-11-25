@@ -1,9 +1,3 @@
 /out
 /node_modules
 .env
-LICENSE
-Makefile
-shell.nix
-package-lock.json
-package.json
-prettierrc
