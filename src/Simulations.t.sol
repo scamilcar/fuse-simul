@@ -31,7 +31,7 @@ contract Simulations is DSTest {
         dai = CERC20(0xCF90552eC3Db6143C83385FdD7bC96ef40F7ee44);
     }
 
-    function testLogMarket() public {
+    /*function testLogMarket() public {
         (Lens.FusePoolUser[] memory preUsers, , ) = lens.getPoolUsersWithData(address(comptroller), 1e18);
         emit log_named_uint("Pre-Liquidatable Users", preUsers.length);
 
@@ -40,5 +40,22 @@ contract Simulations is DSTest {
 
         (Lens.FusePoolUser[] memory postUsers, , ) = lens.getPoolUsersWithData(address(comptroller), 1e18);
         emit log_named_uint("Post-Liquidatable Users", postUsers.length);
+    } */
+    function test_isComptroller() public {
+        uint boool = comptroller.isComptroller() ? 1 : 0;
+        assertEq(boool, 1);
+        emit log_named_uint("isComp", boool);
+    }
+
+    function test_admin() public {
+        emit log_named_address("admin", comptroller.admin());
+    }
+
+    function test_getAssetsIn() public {
+        address account = 0x7c3d434D79DDDAC3174ce0819F55ed82e0276147;
+        address[] memory list = comptroller.getAssetsIn(account);
+        for(uint i=0; i<list.length; i++) {
+            emit log_named_address("Asset in", list[i]);
+        }
     }
 }
